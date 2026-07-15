@@ -1,0 +1,17 @@
+{
+  "name": "crm-playwright",
+  "version": "1.0.0",
+  "description": "Playwright JavaScript conversion of the Selenium/Java Crm18 test suite",
+  "scripts": {
+    "test": "playwright test",
+    "test:positive": "playwright test tests/positive",
+    "test:negative": "playwright test tests/negative",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.48.0"
+  },
+  "dependencies": {
+    "xlsx": "^0.18.5"
+  }
+}

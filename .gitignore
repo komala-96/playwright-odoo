@@ -1,0 +1,34 @@
+# Legacy Java/Selenium projects - not part of this Playwright repo
+Accountinglive/
+Crmlive/
+Customercarelive/
+Inventorylive/
+MicroMarketServiceslive/
+Purchaselive/
+ServiceManagementlive/
+Saleorder/
+Reports18/
+
+# Node
+node_modules/
+
+# Playwright / browser artifacts
+chrome-profile/
+.chrome-profile/
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+playwright/.auth/
+
+# Test output / reports
+reports/
+snaps/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS / editor
+.DS_Store
+.vscode/
