@@ -1,0 +1,16 @@
+{
+  "name": "e2eRegression-playwright",
+  "version": "1.0.0",
+  "description": "End-to-end regression flow chaining page objects from inventory, Customercare, purchase, accounting, and micromarketservices into one continuous business scenario",
+  "scripts": {
+    "test": "playwright test",
+    "test:positive": "playwright test tests/positive",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.48.0"
+  },
+  "dependencies": {
+    "xlsx": "^0.18.5"
+  }
+}

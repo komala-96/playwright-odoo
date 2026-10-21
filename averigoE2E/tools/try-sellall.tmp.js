@@ -1,0 +1,22 @@
+const { chromium } = require('@playwright/test');
+const env = require('../config/env');
+const state = require('../utils/state');
+const { CustomerCarePage } = require('../pages/CustomerCarePage');
+(async () => {
+  const b = await chromium.launch();
+  const c = await b.newContext({ storageState: env.AUTH_FILE, baseURL: env.BASE_URL, viewport: { width: 1600, height: 1000 } });
+  const p = await c.newPage();
+  await p.addLocatorHandler(p.locator('.modal.o_technical_modal').filter({ hasText: 'Open Customer Activities' }), (m) => m.locator('.btn-close').first().click({ timeout: 5000 }).catch(() => m.page().keyboard.press('Escape')));
+  const i = new CustomerCarePage(p);
+  await i.goto(state.get('customer1Url'));
+  const f = i.field('buy_all_item');
+  console.log('HTML:', (await f.evaluate((e) => e.outerHTML)).slice(0, 400));
+  const box = f.locator('input[type=checkbox]').first();
+  console.log('before:', await box.isChecked(), 'disabled:', await box.isDisabled());
+  await box.click({ force: true }); await p.waitForTimeout(2500);
+  console.log('after click:', await box.isChecked());
+  console.log('DIALOGS:', (await p.locator('.modal:visible').allInnerTexts()).map((t) => t.slice(0, 200).replace(/\n+/g, ' | ')).join(' || '));
+  await p.screenshot({ path: 'tools/last.png' });
+  await i.discard().catch(() => {});
+  await b.close();
+})();

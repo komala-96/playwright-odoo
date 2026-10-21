@@ -32,7 +32,7 @@ class InventoryConfiguration {
 
     this.productUPC = page.locator("xpath=//a[normalize-space()='Product UPC Code']");
 
-    this.productUomCategories = page.locator("xpath=//a[normalize-space()='UoM Categories']");
+    this.productUomCategories = page.locator("xpath=//a[normalize-space()='Product Categories']");
 
     this.productUomTypes = page.locator("xpath=//a[normalize-space()='UoM Types']");
 
@@ -52,7 +52,7 @@ class InventoryConfiguration {
 
     this.newBtn = page.locator("xpath=//button[normalize-space()='New']");
 
-    this.categoryName = page.locator("xpath=(//input[@class='o_input o_field_translate'])[1]");
+    this.categoryName = page.getByRole("textbox", { name: "Category Name" });
 
     this.addaLine = page.locator("xpath=//a[normalize-space()='Add a line']");
 
@@ -303,7 +303,7 @@ class InventoryConfiguration {
       await this.page.waitForTimeout(3000);
       await this.newBtn2.click();
       await this.page.waitForTimeout(3000);
-      await this.name1.fill("test");
+      await this.name1.fill("555");
       await this.page.waitForTimeout(3000);
       await this.truck.click();
       await this.truckSelect.click();

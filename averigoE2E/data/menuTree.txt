@@ -1,0 +1,415 @@
+Apps/Apps
+Apps/Apps/Theme Store
+Apps/Apps/Third-Party Apps
+Aramark Product Export
+Averigo Reports
+Calendar
+Calendar/Calendar
+Contacts/Configuration
+Contacts/Configuration/Bank Accounts
+Contacts/Configuration/Bank Accounts/Bank Accounts
+Contacts/Configuration/Bank Accounts/Banks
+Contacts/Configuration/Contact Tags
+Contacts/Configuration/Contact Titles
+Contacts/Configuration/Industries
+Contacts/Configuration/Localization
+Contacts/Configuration/Localization/Countries
+Contacts/Configuration/Localization/Country Group
+Contacts/Configuration/Localization/Fed. States
+Contacts/Contacts
+CRM
+CRM/Calendar Events
+CRM/Configuration
+CRM/Configuration/Activities
+CRM/Configuration/Activities/Activity Plans
+CRM/Configuration/Activities/Activity Types
+CRM/Configuration/Admin Users
+CRM/Configuration/Pipeline
+CRM/Configuration/Pipeline/Lost Reasons
+CRM/Configuration/Pipeline/Tags
+CRM/Configuration/Recurring Plans
+CRM/Configuration/Sales Team
+CRM/Configuration/Types of Visitors
+CRM/Leads
+CRM/Opportunities
+CRM/Planned Activities
+CRM/Reporting
+CRM/Reporting/Activities
+CRM/Reporting/Forecast
+CRM/Reporting/Leads
+CRM/Reporting/Pipeline
+CRM/Sales
+CRM/Sales/Customers
+CRM/Sales/My Activities
+CRM/Sales/My Pipeline
+CRM/Sales/My Quotations
+CRM/Sales/Teams
+Customer Care
+Customer Care/Configuration
+Customer Care/Configuration/Order Types
+Customer Care/Configuration/Parent
+Customer Care/Configuration/Route Master
+Customer Care/Contracts
+Customer Care/Credit Memo
+Customer Care/Customer
+Customer Care/Delivery
+Customer Care/Delivery/Backorders
+Customer Care/Delivery/Delivery Status
+Customer Care/Delivery/Packing Slip
+Customer Care/Delivery/Pick List
+Customer Care/Orders
+Customer Care/Pantry
+Customer Care/Pantry/Pantry Orders
+Discuss/Configuration
+Discuss/Configuration/Canned Responses
+Discuss/Configuration/Notifications
+Discuss/Configuration/Voice & Video
+DocuSign/Docusign Setup
+Email Marketing
+Email Marketing/Campaigns
+Email Marketing/Configuration
+Email Marketing/Configuration/Blacklisted Email Addresses
+Email Marketing/Configuration/Campaign Stages
+Email Marketing/Configuration/Campaign Tags
+Email Marketing/Configuration/Favorite Filters
+Email Marketing/Configuration/Link Tracker
+Email Marketing/Configuration/Optout Reasons
+Email Marketing/Mailing Lists
+Email Marketing/Mailing Lists/Mailing List Contacts
+Email Marketing/Mailing Lists/Mailing Lists
+Email Marketing/Mailings
+Email Marketing/Reporting
+Email Marketing/Reporting/Mass Mailing Analysis
+Email Marketing/Reporting/Opt-Out Report
+Employees
+Employees/Configuration
+Employees/Configuration/Activity Plan
+Employees/Configuration/Challenges
+Employees/Configuration/Challenges/Badges
+Employees/Configuration/Challenges/Challenges
+Employees/Configuration/Challenges/Goals History
+Employees/Configuration/Employee
+Employees/Configuration/Employee/Departure Reasons
+Employees/Configuration/Employee/Tags
+Employees/Configuration/Employee/Working Schedules
+Employees/Configuration/Employee/Work Locations
+Employees/Configuration/Recruitment
+Employees/Configuration/Recruitment/Employment Types
+Employees/Configuration/Recruitment/Job Positions
+Employees/Departments
+Employees/Directory
+Employees/Employees
+Employees/Employees/Employees
+Employees/Employees/Org Chart
+Equipment Management
+Equipment Management/Configuration
+Equipment Management/Configuration/Equipment Area/POS Location
+Equipment Management/Configuration/Equipment Model
+Equipment Management/Configuration/Equipment Model Number
+Equipment Management/Configuration/Equipment Name
+Equipment Management/Configuration/Equipment Parts
+Equipment Management/Configuration/Equipment Type
+Equipment Management/Configuration/Import Equipment
+Equipment Management/Equipment
+Equipment Management/Equipment Activity
+Events
+Events/Configuration
+Events/Configuration/Event Stages
+Events/Configuration/Event Tags Categories
+Events/Configuration/Event Templates
+Events/Events
+Events/Reporting
+Events/Reporting/Attendees
+Financial Accounting
+Financial Accounting/Accounts Payable
+Financial Accounting/Accounts Payable/Advance Payment
+Financial Accounting/Accounts Payable/Bill Payment
+Financial Accounting/Accounts Payable/Bills
+Financial Accounting/Accounts Payable/Credit Memo
+Financial Accounting/Accounts Receivable
+Financial Accounting/Accounts Receivable/Advance
+Financial Accounting/Accounts Receivable/Credit Memo
+Financial Accounting/Accounts Receivable/Invoices
+Financial Accounting/Accounts Receivable/Payment Receipt
+Financial Accounting/General Ledger
+Financial Accounting/General Ledger/Chart of Accounts
+Financial Accounting/General Ledger/Import Chart Of Accounts
+Financial Accounting/General Ledger/Journal Entries
+Inventory
+Inventory/Bin Locations
+Inventory/Configuration
+Inventory/Configuration/Opening Stock
+Inventory/Configuration/Products
+Inventory/Configuration/Products/Product Categories
+Inventory/Configuration/Products/Product UPC Code
+Inventory/Configuration/Route
+Inventory/Configuration/UoM Types
+Inventory/Configuration/Warehouse Management/Email Notifications
+Inventory/Configuration/Warehouse Management/Locations
+Inventory/Configuration/Warehouse Management/Operations Types
+Inventory/Configuration/Warehouse Management/Putaway Rules
+Inventory/Configuration/Warehouse Management/Routes
+Inventory/Configuration/Warehouse Management/Rules
+Inventory/Configuration/Warehouse Management/Storage Categories
+Inventory/Configuration/Warehouse Management/Warehouses
+Inventory/Delivery
+Inventory/Delivery/Backorders
+Inventory/Delivery/Delivery Status
+Inventory/Delivery/Packing Slip
+Inventory/Delivery/Pick List
+Inventory/Inventory Adjustment
+Inventory/Inventory Adjustment/Quantity Adjustments
+Inventory/Inventory Adjustment/Update Warehouse
+Inventory/Inventory Adjustment/Value Adjustments
+Inventory/Locations
+Inventory/Material Issue
+Inventory/Material Receipt
+Inventory/Material Receipt/Direct Receipt
+Inventory/Material Receipt/Sales Return
+Inventory/Material Transfer
+Inventory/Operations/Adjustments
+Inventory/Operations/Adjustments/Physical Inventory
+Inventory/Operations/Adjustments/Scrap
+Inventory/Operations/Jobs
+Inventory/Operations/Jobs/Batch Transfers
+Inventory/Operations/Jobs/Wave Transfers
+Inventory/Operations/Procurement
+Inventory/Operations/Procurement/Replenishment
+Inventory/Operations/Transfers
+Inventory/Operations/Transfers/Deliveries
+Inventory/Operations/Transfers/Dropships
+Inventory/Operations/Transfers/Internal
+Inventory/Operations/Transfers/Receipts
+Inventory/Product Catalog
+Inventory/Product Import
+Inventory/Product Import/Import Canteen Products
+Inventory/Product Import/Import History
+Inventory/Product Master
+Inventory/Products/Products
+Inventory/Reporting/Locations
+Inventory/Reporting/Moves Analysis
+Inventory/Reporting/Moves History
+Inventory/Reporting/Stock
+Inventory/Reporting/Valuation
+Inventory/Virtual Location Stock Transfer
+Invoicing/Accounting
+Invoicing/Accounting/Journal Entries
+Invoicing/Accounting/Journal Items
+Invoicing/Configuration
+Invoicing/Configuration/Accounting
+Invoicing/Configuration/Accounting/Chart of Accounts
+Invoicing/Configuration/Accounting/Currencies
+Invoicing/Configuration/Accounting/Fiscal Positions
+Invoicing/Configuration/Accounting/Journals
+Invoicing/Configuration/Accounting/Multi-Ledger
+Invoicing/Configuration/Accounting/Taxes
+Invoicing/Configuration/Banks
+Invoicing/Configuration/Banks/Add a Bank Account
+Invoicing/Configuration/Banks/Reconciliation Models
+Invoicing/Configuration/Invoicing
+Invoicing/Configuration/Invoicing/Payment Terms
+Invoicing/Configuration/Management
+Invoicing/Configuration/Management/Product Categories
+Invoicing/Configuration/Online Payments
+Invoicing/Configuration/Online Payments/Payment Methods
+Invoicing/Customers
+Invoicing/Customers/Credit Notes
+Invoicing/Customers/Customers
+Invoicing/Customers/Invoices
+Invoicing/Customers/Payments
+Invoicing/Customers/Products
+Invoicing/Customers/Receipts
+Invoicing/Dashboard
+Invoicing/Reporting
+Invoicing/Reporting/Management
+Invoicing/Reporting/Management/Analytic Report
+Invoicing/Reporting/Management/Audit Trail
+Invoicing/Reporting/Management/Invoice Analysis
+Invoicing/Vendors
+Invoicing/Vendors/Bills
+Invoicing/Vendors/Payments
+Invoicing/Vendors/Products
+Invoicing/Vendors/Receipts
+Invoicing/Vendors/Refunds
+Invoicing/Vendors/Vendors
+Micromarket Services
+Micromarket Services/Discontinued Products
+Micromarket Services/Discontinue Products
+Micromarket Services/Frequency
+Micromarket Services/Front Desk/Employee Discount
+Micromarket Services/Locations
+Micromarket Services/Payment Methods
+Micromarket Services/Payment Methods/Other Payment Methods
+Micromarket Services/Specials
+Micromarket Services/Store Orders
+Micromarket Services/Surge Pricing
+Micromarket Services/Update Location
+Micromarket Services/Update Location/Update Location
+Micromarkets/Featured Products
+Micromarkets/UPC Scan Failures
+Purchase
+Purchase/Backorders
+Purchase/Bill
+Purchase/Configuration/Products
+Purchase/Configuration/Products/Product Categories
+Purchase/Configuration/Units of Measures
+Purchase/Configuration/Units of Measures/Units of Measure Categories
+Purchase/Configuration/Vendor Pricelists
+Purchase/Credit Memo
+Purchase/Orders/Purchase Orders
+Purchase/Orders/Requests for Quotation
+Purchase/Products/Products
+Purchase/Purchase Order
+Purchase/Vendors
+RabbitMQ/RabbitMQ Error Logs
+Recruitment
+Recruitment/Applications
+Recruitment/Applications/All Applications
+Recruitment/Applications/By Job Positions
+Recruitment/Applications/By Job Positions
+Recruitment/Applications/Candidates
+Recruitment/Configuration
+Recruitment/Configuration/Activities
+Recruitment/Configuration/Activities/Activity Plans
+Recruitment/Configuration/Activities/Activity Types
+Recruitment/Configuration/Applications
+Recruitment/Configuration/Applications/Degrees
+Recruitment/Configuration/Applications/Refuse Reasons
+Recruitment/Configuration/Applications/Tags
+Recruitment/Configuration/Employees
+Recruitment/Configuration/Employees/Departments
+Recruitment/Configuration/Job Boards
+Recruitment/Configuration/Job Boards/Emails
+Recruitment/Configuration/Job Positions
+Recruitment/Configuration/Job Positions/Employment Types
+Recruitment/Reporting
+Recruitment/Reporting/Recruitment Analysis
+Recurring
+Recurring/Bill
+Recurring/Purchase Orders
+Recurring/Reports
+Recurring/Sale Orders
+Sales/Configuration
+Sales/Configuration/Activities
+Sales/Configuration/Activities/Activity Plans
+Sales/Configuration/Online Payments/Payment Methods
+Sales/Configuration/Products
+Sales/Configuration/Products/Combo Choices
+Sales/Configuration/Products/Product Categories
+Sales/Configuration/Products/Product Tags
+Sales/Configuration/Sales Orders
+Sales/Configuration/Sales Orders/Delivery Methods
+Sales/Configuration/Sales Orders/Tags
+Sales/Configuration/Sales Teams
+Sales/Configuration/Units of Measure
+Sales/Configuration/Units of Measure/Units of Measure Categories
+Sales/Orders
+Sales/Orders/Customers
+Sales/Orders/Orders
+Sales/Orders/Quotations
+Sales/Orders/Sales Teams
+Sales/Products
+Sales/Products/Pricelists
+Sales/Products/Products
+Sales/Reporting
+Sales/Reporting/Customers
+Sales/Reporting/Products
+Sales/Reporting/Sales
+Sales/Reporting/Salespersons
+Sales/To Invoice
+Sales/To Invoice/Orders to Invoice
+Sales/To Invoice/Orders to Upsell
+Service Management
+Service Management/Cases
+Service Management/Configuration
+Service Management/Configuration/Case Categories
+Service Management/Configuration/Case Origins
+Service Management/Configuration/Case Stages
+Service Management/Configuration/Case Type
+Service Management/Equipment
+Service Management/Equipment Parts
+Service Management/Schedule Tech Person
+Setup
+Setup/Branches
+Setup/Company Information
+Setup/Customer Type
+Setup/Default Setup
+Setup/Default Setup/Payable
+Setup/Default Setup/Purchase
+Setup/Default Setup/Receivable
+Setup/Default Setup/Sales
+Setup/Email Notifications
+Setup/Email Template
+Setup/Gamification Tools/Badges
+Setup/Gamification Tools/Challenges
+Setup/Gamification Tools/Goal Definitions
+Setup/Gamification Tools/Goals
+Setup/Gamification Tools/Ranks
+Setup/Micromarket Fees
+Setup/Security
+Setup/Security/Group Security
+Setup/Tax Setting
+Setup/Tax Setting/Additional Taxes
+Setup/Tax Setting/Fuel Charge
+Setup/Tax Setting/Hazard Fee
+Setup/Technical/Actions
+Setup/Technical/Actions/Embedded Actions
+Setup/Technical/Actions/Reports
+Setup/Technical/Actions/User-defined Defaults
+Setup/Technical/Actions/Window Actions
+Setup/Technical/Activities
+Setup/Technical/Activities/Activity Overview
+Setup/Technical/Activities/Activity Plans
+Setup/Technical/Activities/Activity Types
+Setup/Technical/Database Structure
+Setup/Technical/Database Structure/Attachments
+Setup/Technical/Database Structure/Fields
+Setup/Technical/Database Structure/Fields Selection
+Setup/Technical/Database Structure/Logging
+Setup/Technical/Database Structure/Models
+Setup/Technical/Discuss
+Setup/Technical/Discuss/Email Blacklist
+Setup/Technical/Discuss/GIF favorite
+Setup/Technical/Discuss/Guests
+Setup/Technical/Discuss/Link Previews
+Setup/Technical/Discuss/Messages
+Setup/Technical/Discuss/Ratings
+Setup/Technical/Discuss/Subtypes
+Setup/Technical/Discuss/User Settings
+Setup/Technical/Email
+Setup/Technical/Email/Digest Emails
+Setup/Technical/Email/Digest Tips
+Setup/Technical/Email/Email Templates
+Setup/Technical/Email/Snailmail Letters
+Setup/Technical/IAP
+Setup/Technical/IAP/IAP Accounts
+Setup/Technical/Mass Mailing
+Setup/Technical/Mass Mailing/Mailing Traces
+Setup/Technical/Phone / SMS
+Setup/Technical/Phone / SMS/SMS Templates
+Setup/Technical/Resource
+Setup/Technical/Resource/Resources
+Setup/Technical/Resource/Resource Time Off
+Setup/Technical/Resource/Working Schedules
+Setup/Technical/Security
+Setup/Technical/Security/Access Rights
+Setup/Technical/Security/Record Rules
+Setup/Technical/Security/User Devices
+Setup/Technical/Sequences & Identifiers/Sequences
+Setup/Technical/User Interface
+Setup/Technical/User Interface/Menu Items
+Setup/Technical/User Interface/Tours
+Setup/Technical/User Interface/User-defined Filters
+Setup/Terminal Cancellation
+Setup/Translations/Import / Export/Export Translation
+Setup/Translations/Languages
+Setup/Users
+Setup/Users & Companies/Companies
+Setup/Users & Companies/Users
+Surveys
+Surveys/Participations
+Surveys/Questions & Answers
+Surveys/Questions & Answers/Detailed Answers
+Surveys/Questions & Answers/Questions
+Surveys/Questions & Answers/Suggested Values
+Surveys/Surveys

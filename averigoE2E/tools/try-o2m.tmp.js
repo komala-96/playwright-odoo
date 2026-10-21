@@ -1,0 +1,20 @@
+const { chromium } = require('@playwright/test');
+const env = require('../config/env');
+const { OdooPage } = require('../pages/OdooPage');
+(async () => {
+  const [app, menu, tab, field] = process.argv.slice(2);
+  const b = await chromium.launch();
+  const c = await b.newContext({ storageState: env.AUTH_FILE, baseURL: env.BASE_URL, viewport: { width: 1600, height: 900 } });
+  const p = await c.newPage();
+  await p.addLocatorHandler(p.locator('.modal.o_technical_modal').filter({ hasText: 'Open Customer Activities' }), (m) => m.locator('.btn-close').first().click({ timeout: 5000 }).catch(() => m.page().keyboard.press('Escape')));
+  const o = new OdooPage(p);
+  await o.openApp(app); await o.openMenu(...menu.split('>')); await o.clickNew();
+  if (tab) await o.openTab(tab);
+  const f = p.locator(`.o_field_widget[name=${field}]`).filter({ visible: true }).first();
+  const html = (sel) => f.evaluate((e, sel) => e.querySelector(sel)?.outerHTML.replace(/\s+/g, ' ').slice(0, 1500), sel);
+  console.log('BEFORE tbody:', await html('tbody'));
+  await f.locator('.o_field_x2many_list_row_add a').first().click(); await p.waitForTimeout(1500);
+  console.log('AFTER tbody:', await html('tbody'));
+  console.log('MODAL?', await p.locator('.modal:visible').count());
+  await b.close();
+})();

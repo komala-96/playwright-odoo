@@ -1,0 +1,21 @@
+const { chromium } = require('@playwright/test');
+const env = require('../config/env');
+const state = require('../utils/state');
+const { CustomerCarePage } = require('../pages/CustomerCarePage');
+(async () => {
+  const b = await chromium.launch();
+  const c = await b.newContext({ storageState: env.AUTH_FILE, baseURL: env.BASE_URL, viewport: { width: 1600, height: 1000 } });
+  const p = await c.newPage();
+  await p.addLocatorHandler(p.locator('.modal.o_technical_modal').filter({ hasText: 'Open Customer Activities' }), (m) => m.locator('.btn-close').first().click({ timeout: 5000 }).catch(() => m.page().keyboard.press('Escape')));
+  const i = new CustomerCarePage(p);
+  await i.goto(state.get('parentCustomerUrl'));
+  await i.openTab('Preventive Cases');
+  console.log('CASE TAB:', (await i.field('case_ids').innerText()).slice(0, 300).replace(/\n+/g, ' | '));
+  await i.field('case_ids').locator('button, a').filter({ hasText: /^\s*Add/ }).first().click();
+  await p.waitForTimeout(2500);
+  const d2 = i.dialogs().last();
+  console.log('CASE DIALOG FIELDS:', await d2.evaluate((el) => [...el.querySelectorAll('.o_field_widget[name]')].filter((e) => e.offsetParent).map((e) => { const lbl = e.closest('.o_cell, .o_wrap_field, td')?.previousElementSibling?.innerText?.trim() || ''; return `${e.getAttribute('name')}[${(e.className.match(/o_field_\w+/g) || []).slice(1).join(',')}]${e.closest('.o_required_modifier') || e.classList.contains('o_required_modifier') ? '*' : ''} ${lbl}`; }).join('\n  ')).catch((e) => 'none ' + e.message));
+  console.log('CASE DIALOG BUTTONS:', (await d2.locator('.modal-footer button').allInnerTexts()).join(' | '));
+  await p.screenshot({ path: 'tools/last.png' });
+  await b.close();
+})();

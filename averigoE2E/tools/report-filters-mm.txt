@@ -1,0 +1,54 @@
+## Stock Analysis Report
+  filters: Customers=chips | Micromarkets=chips | Categories=chips | Report Type=select[Summary/Detail]
+  columns: Category | Current Stock | Max Qty | Qty Percentage (%)
+## Stock Value Report
+  filters: Customers=chips | Micromarkets=chips | As On Date*=date | Categories=chips | Report Type=select[Summary/Detail/Category]
+  columns: Product Code | Product | Category | Stock On Hand | Cost | Total Value
+## Store Order List Report
+  filters: Customers=chips | Micromarkets=chips | Start Date*=date | End Date=date | Status=select[Draft/Approved/Picked/Partially Picked/Received/Partially Received/Cancelled]
+  columns: Order # | Order Date | Received Date | Route | Customer/Location | Micromarket | Transit Location | Ordered Qty | Picked Qty | Received Qty | Ordered SKUs | Picked SKUs | Received SKUs | Picked User | Received User | Status
+## Product Move Report
+  filters: Customers=chips | Micromarkets=chips | Products=chips | Start Date=date | End Date=date
+  columns: Product | Quantity Sold | Shrink Quantity | Quantity Spoiled | Total Units
+## Subsidy Report
+  filters: Customers=chips | Micromarket=chips | Start Date*=date | End Date=date | Product Categories=chips | Report Type=select[By Product/By category]
+  columns: Micromarket | Product Code | Product Description | Category | Subsidy Includes Tax | Taxable | MM Price | Sold Price | Subsidy | Subsidy Tax | Units Sold | Total Subsidy | Total Subsidy Tax
+## Unpicked Product List Report
+  filters: Customers=chips | Micromarkets=chips | Start Date*=date | End Date=date
+  columns: Order # | Order Date | Customer/Location | Micromarket | Product | Ordered Qty | Unpicked Qty | Store Order State
+## Where Sold Report
+  filters: Customers=chips | Micromarkets=chips | Products=chips | Start Date*=date | End Date=date
+  columns: Product Code | Product | Category | Customer Name | Micromarket | UOM | Quantity | Sales
+## Products with Min/Max Report
+  filters: Customers=chips | Micromarkets=chips | Products=chips | Min/Max at 0 Only=input
+  columns: Product Code | Product | Category | Min | Max
+## Customer Commission Report
+  filters: Micromarket Type=select[Office/Hotel/Others/All Types] | Micromarkets=chips | Start Date*=date | End Date*=date
+  columns: Micromarket | Gross Sales | Sales Tax | Container Deposit | Other Tax | Net Sales | Margin | Margin % | Hotel Comm. | Comm. Net Sales% | Comm. Margin%
+## Employee Discount Report
+  filters: Employees=chips | Micromarkets=chips | Start Date*=date | End Date=date | Report Type=select[Summary/Detail] | Include All Employees=input
+  columns: Employee | MicroMarket | Total Orders | Total Products | Total Quantity | Total Discount
+## Payroll Deduction Report
+  filters: Customers*=chips | Micromarket=chips | Start Date*=date | End Date=date | Consolidate=input | Item=input | Quantity=input
+  columns: Session Number | User | Employee ID | Micromarket | Date | Total Amount
+## Micromarket Sales Analysis Report
+  filters: Customers=chips | Micromarkets=chips | Start Date=date | End Date=date
+  columns: Customer/Location | Micromarket | Location ID | Provider Market ID | Total
+## Periodic Sales Report
+  filters: Micromarkets=input | Type=select[Weekly/Monthly] | Year=select[Select Year.../2019/2020/2021/2022/2023/2024/2025/2026] | Start Date=input | End Date=input | Total Records:=select[10/20/50/All]
+  columns: MicroMarket | Previous Period | Current Period | Percentage(%) | Status | Previous Period($) | Current Period($) | Percentage(%) | Status | Product With No Sale | Product Sold Out
+## Weekly Sales Report
+  filters: Customers*=chips | Micromarkets=chips | Year*=chips | Weeks=chips
+  columns: Week | Micromarket | Net Sales | Subsidy | Total Sales | Spoilage | Theft | Total Units Sold | Total Inventory Units | Total SKUs | Total Zero Sales Items | Total Items
+## Product Rank Report
+  filters: Customer=chips | Market Type=chips | Micromarkets=chips | Start Date*=date | End Date=date | Period=select[This Month/Last Month/Last 3 Months/Last 6 Months] | Report Type=select[Summary/Detail] | Categories=chips | Product=chips
+  columns: Rank | No. of Market | Product Description | Category | Sold Quantity | Amount
+## Terminal Report
+  filters: Micromarkets=chips | Type=select[Select Type/Time Out/Cancel] | Start Date*=date | End Date=date | Terminal Type=select[Select Terminal Type/Main/FD]
+  columns: Date | Time | Micromarket | Type | Terminal Type
+## Daily Net Sales By Customer Report
+  filters: Customer=input | Market Type=input | Micromarket=input | Start Date=date | End Date=date
+  columns: Micromarket | Total
+## Monthly Net Sales By Customer
+  filters: Customer=input | Market Type=input | Micromarket=input | Start Date=date | End Date=date
+  columns: Micromarket

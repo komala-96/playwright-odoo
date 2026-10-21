@@ -1,0 +1,21 @@
+const { chromium } = require('@playwright/test');
+const env = require('../config/env');
+const { InventoryPage } = require('../pages/InventoryPage');
+(async () => {
+  const b = await chromium.launch();
+  const c = await b.newContext({ storageState: env.AUTH_FILE, baseURL: env.BASE_URL, viewport: { width: 1600, height: 1000 } });
+  const p = await c.newPage();
+  await p.addLocatorHandler(p.locator('.modal.o_technical_modal').filter({ hasText: 'Open Customer Activities' }), (m) => m.locator('.btn-close').first().click({ timeout: 5000 }).catch(() => m.page().keyboard.press('Escape')));
+  const i = new InventoryPage(p);
+  await i.open(); await i.openMenu('Locations'); await i.clickNew();
+  await i.fill({ location_type: 'Warehouse' });
+  const st = async (label) => console.log(label, await i.field('route').evaluate((el) => el.outerHTML.slice(0, 400)));
+  await st('initial:');
+  await i.fill({ division_id: 'Martiserv Default' });
+  await st('after division:');
+  await i.fill({ frequency: 'Test1' });
+  await st('after frequency:');
+  console.log('next date after frequency:', await i.read('frequency_date'));
+  await i.discard().catch(() => {});
+  await b.close();
+})();

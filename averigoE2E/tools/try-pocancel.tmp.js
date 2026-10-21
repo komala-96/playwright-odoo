@@ -1,0 +1,20 @@
+const { chromium } = require('@playwright/test');
+const env = require('../config/env');
+const { PurchasePage } = require('../pages/PurchasePage');
+(async () => {
+  const b = await chromium.launch();
+  const c = await b.newContext({ storageState: env.AUTH_FILE, baseURL: env.BASE_URL, viewport: { width: 1600, height: 1000 } });
+  const p = await c.newPage();
+  await p.addLocatorHandler(p.locator('.modal.o_technical_modal').filter({ hasText: 'Open Customer Activities' }), (m) => m.locator('.btn-close').first().click({ timeout: 5000 }).catch(() => m.page().keyboard.press('Escape')));
+  const pp = new PurchasePage(p);
+  await pp.open('Purchase Order'); await pp.search('P00784');
+  await pp.rows('P00784').first().locator('td.o_data_cell').filter({ hasText: 'P00784' }).first().click();
+  await pp.field('order_line').waitFor();
+  console.log('STATUS:', await pp.status());
+  console.log('BUTTONS:', (await p.locator('.o_form_view .o_statusbar_buttons button, .o_form_view .o_form_statusbar button').filter({ visible: true }).evaluateAll((bs) => bs.map((x) => `${x.innerText.trim()}{${x.getAttribute('name') || ''}}`))).join(' | '));
+  await p.locator('.o_control_panel button, .o_cp_action_menus button').filter({ hasText: /^\s*Action\s*$/ }).first().click();
+  await p.waitForTimeout(800);
+  console.log('ACTION:', (await p.locator('.o-dropdown--menu .dropdown-item').filter({ visible: true }).allInnerTexts()).map((t) => t.trim()).join(' | '));
+  await p.keyboard.press('Escape');
+  await b.close();
+})();

@@ -1,0 +1,40 @@
+{
+  "runId": "1792484700250",
+  "baseUrl": "https://martiserv.averigoqa.com",
+  "startedAt": "2026-10-20T08:25:14.271Z",
+  "scenarios": {
+    "1": {
+      "no": 1,
+      "title": "Creation of customer (all fields)",
+      "status": "failed",
+      "totalMs": 219725,
+      "steps": [
+        {
+          "name": "Create customer: every field, 7 contacts/addresses, Order Products, catalogue, account setup, preventive case",
+          "kind": "flow",
+          "ms": 219724,
+          "ok": false,
+          "serverMs": 3925,
+          "calls": [
+            {
+              "call": "res.partner.web_save",
+              "ms": 2869
+            },
+            {
+              "call": "res.partner.web_save",
+              "ms": 457
+            },
+            {
+              "call": "res.partner.add_product",
+              "ms": 599
+            }
+          ]
+        }
+      ],
+      "notes": [],
+      "error": "PROD-QA-002-92196 added to Order Products\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.modal:visible').filter({ hasNotText: 'Open Customer Activities' }).locator('.o_form_view').or(locator('.o_action_manager .o_form_view, .o_action_manager .o_view_controller.o_list_view .o_selected_row')).last().locator('.o_field_widget[name=\"customer_product_ids\"]').visible().first().locator('.o_data_row').filter({ hasText: 'PROD-QA-002-92196' }).first()\nExpected: visible",
+      "at": "2026-10-20T08:28:53.996Z"
+    }
+  },
+  "finishedAt": "2026-10-20T08:28:53.996Z"
+}

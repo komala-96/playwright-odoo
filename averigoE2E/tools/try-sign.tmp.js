@@ -1,0 +1,23 @@
+const { chromium } = require('@playwright/test');
+const env = require('../config/env');
+const d = require('../data/testData');
+const { AccountingPage } = require('../pages/AccountingPage');
+(async () => {
+  const b = await chromium.launch();
+  const c = await b.newContext({ storageState: env.AUTH_FILE, baseURL: env.BASE_URL, viewport: { width: 1600, height: 1000 } });
+  const p = await c.newPage();
+  await p.addLocatorHandler(p.locator('.modal.o_technical_modal').filter({ hasText: 'Open Customer Activities' }), (m) => m.locator('.btn-close').first().click({ timeout: 5000 }).catch(() => m.page().keyboard.press('Escape')));
+  const a = new AccountingPage(p);
+  await a.openAR('Invoices'); await a.clickNew();
+  await a.fill({ partner_id: d.customer1.name });
+  await a.openTab('Signature');
+  const sig = a.field('signature');
+  console.log('SIG HTML:', (await sig.evaluate((e) => e.outerHTML)).slice(0, 400));
+  await sig.click(); await p.waitForTimeout(1500);
+  const dlg = p.locator('.modal:visible').filter({ hasNotText: 'Open Customer Activities' }).last();
+  console.log('SIG DIALOG:', (await dlg.innerText().catch(() => 'none')).slice(0, 300).replace(/\n+/g, ' | '));
+  console.log('SIG DIALOG BUTTONS:', (await dlg.locator('button, a').filter({ visible: true }).allInnerTexts().catch(() => [])).map((t) => t.trim()).filter(Boolean).join(' | '));
+  await p.keyboard.press('Escape');
+  await a.discard().catch(() => {});
+  await b.close();
+})();

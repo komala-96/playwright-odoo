@@ -1,0 +1,21 @@
+const { chromium } = require('@playwright/test');
+const env = require('../config/env');
+const { AccountingPage } = require('../pages/AccountingPage');
+(async () => {
+  const b = await chromium.launch();
+  const c = await b.newContext({ storageState: env.AUTH_FILE, baseURL: env.BASE_URL, viewport: { width: 1600, height: 1000 } });
+  const p = await c.newPage();
+  await p.addLocatorHandler(p.locator('.modal.o_technical_modal').filter({ hasText: 'Open Customer Activities' }), (m) => m.locator('.btn-close').first().click({ timeout: 5000 }).catch(() => m.page().keyboard.press('Escape')));
+  const a = new AccountingPage(p);
+  await a.openAR('Invoices');
+  await a.openRecord('Draft-INV400');
+  const row = a.field('invoice_line_ids').locator('.o_data_row').first();
+  console.log('UoM cell class:', await row.locator('td[name="product_uomm_id"]').getAttribute('class'));
+  await row.locator('td[name="product_uomm_id"]').click(); await p.waitForTimeout(1500);
+  const sel = a.field('invoice_line_ids').locator('.o_data_row.o_selected_row');
+  console.log('selected rows:', await sel.count());
+  console.log('UoM cell editing HTML:', (await sel.locator('td[name="product_uomm_id"]').evaluate((e) => e.innerHTML).catch(() => 'n/a')).slice(0, 300));
+  for (const n of ['quantity', 'price_unit', 'name']) console.log(n, 'input:', await sel.locator(`td[name="${n}"] input, td[name="${n}"] textarea`).count());
+  await a.discard().catch(() => {});
+  await b.close();
+})();
