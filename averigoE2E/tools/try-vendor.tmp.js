@@ -1,0 +1,34 @@
+// Lists every visible field on a new Vendor form, per tab, with widget / required / readonly / options.
+const { chromium } = require('@playwright/test');
+const env = require('../config/env');
+const { PurchasePage } = require('../pages/PurchasePage');
+(async () => {
+  const b = await chromium.launch();
+  const c = await b.newContext({ storageState: env.AUTH_FILE, baseURL: env.BASE_URL, viewport: { width: 1600, height: 1000 } });
+  const p = await c.newPage();
+  await p.addLocatorHandler(p.locator('.modal.o_technical_modal').filter({ hasText: 'Open Customer Activities' }), (m) => m.locator('.btn-close').first().click({ timeout: 5000 }).catch(() => m.page().keyboard.press('Escape')));
+  const pp = new PurchasePage(p);
+  await pp.open(); await pp.openMenu('Vendors'); await pp.clickNew();
+  await p.waitForTimeout(1500);
+  const dump = (scopeSel) => p.evaluate((sel) => {
+    const root = document.querySelector(sel);
+    return [...root.querySelectorAll('.o_field_widget[name]')].filter((e) => e.offsetParent && !e.closest('.o_data_row')).map((e) => {
+      const id = e.querySelector('input,select,textarea')?.id;
+      const l = (id && document.querySelector(`label[for="${id}"]`)?.innerText.trim()) || '';
+      const sel2 = e.querySelector('select');
+      const cb = e.querySelector('input[type=checkbox]');
+      const val = sel2 ? sel2.options[sel2.selectedIndex]?.text : cb ? String(cb.checked) : (e.querySelector('input,textarea')?.value ?? e.innerText.trim().slice(0, 30));
+      const opts = sel2 ? ' {' + [...sel2.options].map((o) => o.text.trim()).filter(Boolean).slice(0, 8).join('/') + '}' : '';
+      const cls = (e.className.match(/o_field_\w+/g) || []).filter((x) => x !== 'o_field_widget').join(',');
+      const cols = e.querySelector('table') ? ' cols:' + [...e.querySelectorAll('th[data-name]')].map((t) => t.dataset.name).join(',') : '';
+      return `${e.getAttribute('name')} [${cls}]${e.classList.contains('o_required_modifier') ? '*' : ''}${e.classList.contains('o_readonly_modifier') ? ' RO' : ''} "${l}" = ${JSON.stringify(val)}${opts}${cols}`;
+    });
+  }, scopeSel);
+  console.log('--- HEADER\n  ' + (await dump('.o_action_manager .o_form_view')).join('\n  '));
+  const tabs = (await p.locator('.o_form_view .o_notebook .nav-link').allInnerTexts()).map((t) => t.trim()).filter(Boolean);
+  console.log('TABS:', tabs.join(' | '));
+  for (const t of tabs) { await pp.openTab(t); console.log(`--- TAB ${t}\n  ` + (await dump('.o_form_view .o_notebook .tab-pane.active')).join('\n  ')); }
+  console.log('BUTTONS:', (await p.locator('.o_form_view button').filter({ visible: true }).allInnerTexts()).map((x) => x.trim()).filter(Boolean).join(' | '));
+  await pp.discard().catch(() => {});
+  await b.close();
+})();

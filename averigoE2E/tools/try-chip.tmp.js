@@ -1,0 +1,25 @@
+const { chromium } = require('@playwright/test');
+const env = require('../config/env');
+const { ReportsPage } = require('../pages/ReportsPage');
+(async () => {
+  const [cat, tile, label, q] = process.argv.slice(2);
+  const b = await chromium.launch();
+  const c = await b.newContext({ storageState: env.AUTH_FILE, baseURL: env.BASE_URL, viewport: { width: 1600, height: 1000 } });
+  const p = await c.newPage();
+  await p.addLocatorHandler(p.locator('.modal.o_technical_modal').filter({ hasText: 'Open Customer Activities' }), (m) => m.locator('.btn-close').first().click({ timeout: 5000 }).catch(() => m.page().keyboard.press('Escape')));
+  if (0) p.on('request', (rq) => { if (rq.url().includes('call_kw') || rq.url().includes('/report')) { const d = rq.postDataJSON?.(); const pr = d?.params || {}; if (/partner|customer/i.test(JSON.stringify(pr).slice(0, 2000))) console.log('REQ', rq.url().split('/').slice(-2).join('/'), JSON.stringify(pr).slice(0, 700)); } });
+  const r = new ReportsPage(p);
+  await r.openReport(cat, tile);
+  const box = r.filterBox(label);
+  await box.locator('.mm-chipbox, .filter-dropdown-container > .form-control').first().click(); await p.waitForTimeout(2000);
+  const items = box.locator('label, li, .dropdown-item, .dropdown-item-check').filter({ visible: true });
+  const all = await items.allInnerTexts();
+  console.log('COUNT', all.length, 'QA ENTRIES', all.filter((t) => /QA|CUST/i.test(t)));
+  const search = box.locator('input:not([type="checkbox"])').filter({ visible: true }).first();
+  await search.fill(q); await p.waitForTimeout(3000);
+  console.log('AFTER SEARCH', (await items.allInnerTexts()).slice(0, 10));
+  await search.fill(''); await search.pressSequentially(q, { delay: 60 }); await p.waitForTimeout(3000);
+  console.log('AFTER TYPING', (await items.allInnerTexts()).slice(0, 10));
+  console.log('HTML', (await box.evaluate((e) => e.innerHTML)).replace(/\s+/g, ' ').slice(0, 800));
+  await b.close();
+})();

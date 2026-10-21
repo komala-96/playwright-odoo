@@ -1,0 +1,24 @@
+const { chromium } = require('@playwright/test');
+const env = require('../config/env');
+const { PurchasePage } = require('../pages/PurchasePage');
+(async () => {
+  const url = require('fs').readFileSync('tools/last-po-url.txt', 'utf8').trim();
+  const b = await chromium.launch();
+  const c = await b.newContext({ storageState: env.AUTH_FILE, baseURL: env.BASE_URL, viewport: { width: 1600, height: 1000 } });
+  const p = await c.newPage();
+  await p.addLocatorHandler(p.locator('.modal.o_technical_modal').filter({ hasText: 'Open Customer Activities' }), (m) => m.locator('.btn-close').first().click({ timeout: 5000 }).catch(() => m.page().keyboard.press('Escape')));
+  const o = new PurchasePage(p);
+  await o.goto(url);
+  await p.locator('.o_form_view button[name=action_view_picking]').filter({ hasText: 'Receive Products' }).click(); await o.waitReady(); await p.waitForTimeout(2000);
+  console.log('URL', p.url());
+  const scope = p.locator('.modal:visible').last().or(p.locator('.o_action_manager')).last();
+  console.log('FIELDS', await p.evaluate(() => [...document.querySelectorAll('.o_form_view .o_field_widget[name]')].filter((e) => e.offsetParent && !e.closest('.o_data_row')).map((e) => e.getAttribute('name')).join(' ')));
+  console.log('COLS', await p.locator('.o_form_view th[data-name]').evaluateAll((t) => t.map((x) => x.dataset.name + ':' + x.innerText.trim()).join(' | ')));
+  console.log('ROWS', await p.locator('.o_form_view .o_data_row').allInnerTexts());
+  console.log('BUTTONS', await p.evaluate(() => [...document.querySelectorAll('.o_form_view button, .modal button')].filter((b) => b.offsetParent && b.innerText.trim()).map((b) => b.innerText.trim().replace(/\s+/g, ' ') + (b.name ? `{${b.name}}` : '')).join(' | ')));
+  await p.locator('button[name=button_validate]').click(); await o.waitReady(); await p.waitForTimeout(2500);
+  console.log('AFTER MODALS', (await p.locator('.modal:visible').allInnerTexts()).map((t) => t.replace(/\s+/g, ' ').slice(0, 300)));
+  console.log('AFTER STATUS', (await p.locator('.o_statusbar_status').innerText().catch(() => '')).replace(/\s+/g, ' '), p.url());
+  console.log('AFTER BUTTONS', await p.evaluate(() => [...document.querySelectorAll('.o_form_view button, .modal button')].filter((b) => b.offsetParent && b.innerText.trim()).map((b) => b.innerText.trim().replace(/\s+/g, ' ') + (b.name ? `{${b.name}}` : '')).join(' | ')));
+  await b.close();
+})();

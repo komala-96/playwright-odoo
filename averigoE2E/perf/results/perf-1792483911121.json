@@ -1,0 +1,187 @@
+{
+  "runId": "1792483911121",
+  "baseUrl": "https://martiserv.averigoqa.com",
+  "startedAt": "2026-10-20T08:12:05.902Z",
+  "scenarios": {
+    "1": {
+      "no": 1,
+      "title": "Creation of customer",
+      "status": "passed",
+      "totalMs": 35475,
+      "steps": [
+        {
+          "name": "Open Customer list",
+          "kind": "app",
+          "ms": 26072,
+          "ok": true
+        },
+        {
+          "name": "Open new customer form",
+          "kind": "app",
+          "ms": 2095,
+          "ok": true
+        },
+        {
+          "name": "Fill name, address, receivable account",
+          "kind": "ui",
+          "ms": 3416,
+          "ok": true
+        },
+        {
+          "name": "Save customer",
+          "kind": "app",
+          "ms": 3882,
+          "ok": true
+        }
+      ],
+      "notes": [
+        "PERF-CUST-11121 -> https://martiserv.averigoqa.com/odoo/customer/30538"
+      ],
+      "at": "2026-10-20T08:12:41.377Z"
+    },
+    "2": {
+      "no": 2,
+      "title": "Creation of vendor",
+      "status": "passed",
+      "totalMs": 36189,
+      "steps": [
+        {
+          "name": "Open Vendor list",
+          "kind": "app",
+          "ms": 23701,
+          "ok": true
+        },
+        {
+          "name": "Open new vendor form",
+          "kind": "app",
+          "ms": 1947,
+          "ok": true
+        },
+        {
+          "name": "Fill name, address, Buy All Products, payable account",
+          "kind": "ui",
+          "ms": 7385,
+          "ok": true
+        },
+        {
+          "name": "Save vendor",
+          "kind": "app",
+          "ms": 3149,
+          "ok": true
+        }
+      ],
+      "notes": [
+        "PERF-VEND-11121 -> https://martiserv.averigoqa.com/odoo/action-1782/30541"
+      ],
+      "at": "2026-10-20T08:13:25.889Z"
+    },
+    "3": {
+      "no": 3,
+      "title": "Creation of micromarket in location screen",
+      "status": "passed",
+      "totalMs": 97776,
+      "steps": [
+        {
+          "name": "Open Locations list",
+          "kind": "app",
+          "ms": 13964,
+          "ok": true
+        },
+        {
+          "name": "Open new location form",
+          "kind": "app",
+          "ms": 1010,
+          "ok": true
+        },
+        {
+          "name": "Fill type Micromarket, name, customer, address",
+          "kind": "ui",
+          "ms": 2628,
+          "ok": true
+        },
+        {
+          "name": "Save micromarket (builds its warehouse)",
+          "kind": "app",
+          "ms": 80168,
+          "ok": true
+        }
+      ],
+      "notes": [
+        "PERF-MM-11121 -> https://martiserv.averigoqa.com/odoo/location/4742"
+      ],
+      "at": "2026-10-20T08:15:10.590Z"
+    },
+    "4": {
+      "no": 4,
+      "title": "Creation of product from product master",
+      "status": "passed",
+      "totalMs": 19917,
+      "steps": [
+        {
+          "name": "Open Product Master list",
+          "kind": "app",
+          "ms": 11306,
+          "ok": true
+        },
+        {
+          "name": "Open new product form",
+          "kind": "app",
+          "ms": 828,
+          "ok": true
+        },
+        {
+          "name": "Fill name, code, type, category, UoM, bin, price",
+          "kind": "ui",
+          "ms": 4179,
+          "ok": true
+        },
+        {
+          "name": "Save product",
+          "kind": "app",
+          "ms": 3597,
+          "ok": true
+        }
+      ],
+      "notes": [
+        "PERF-PROD-11121 -> https://martiserv.averigoqa.com/odoo/product-master/128177"
+      ],
+      "at": "2026-10-20T08:16:55.264Z"
+    },
+    "5": {
+      "no": 5,
+      "title": "Creation of Sale order for 150 products",
+      "status": "failed",
+      "totalMs": 83789,
+      "steps": [
+        {
+          "name": "Open Orders list",
+          "kind": "app",
+          "ms": 12323,
+          "ok": true
+        },
+        {
+          "name": "Open new order form",
+          "kind": "app",
+          "ms": 2150,
+          "ok": true
+        },
+        {
+          "name": "Customer + Show All Products",
+          "kind": "ui",
+          "ms": 5345,
+          "ok": true
+        },
+        {
+          "name": "Pick 150 products (Search More)",
+          "kind": "ui",
+          "ms": 63152,
+          "ok": false
+        }
+      ],
+      "notes": [],
+      "error": "locator.click: Timeout 60000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.modal:visible').filter({ has: locator('.o_list_view') }).last().locator('.modal-footer button').filter({ hasText: /^\\s*Select\\s*$/ })\u001b[22m\n\u001b[2m    - locator resolved to <button disabled data-hotkey=\"v\" class=\"btn btn-primary o_select_button\"> Select </button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m",
+      "at": "2026-10-20T08:18:26.086Z"
+    }
+  },
+  "finishedAt": "2026-10-20T08:18:26.086Z"
+}

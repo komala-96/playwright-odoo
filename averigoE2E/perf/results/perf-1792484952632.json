@@ -1,0 +1,487 @@
+{
+  "runId": "1792484952632",
+  "baseUrl": "https://martiserv.averigoqa.com",
+  "startedAt": "2026-10-20T08:29:35.348Z",
+  "scenarios": {
+    "1": {
+      "no": 1,
+      "title": "Creation of customer (all fields)",
+      "status": "passed",
+      "totalMs": 232462,
+      "steps": [
+        {
+          "name": "Create customer: every field, 7 contacts/addresses, Order Products, catalogue, account setup, preventive case",
+          "kind": "flow",
+          "ms": 220815,
+          "ok": true,
+          "serverMs": 5643,
+          "calls": [
+            {
+              "call": "res.partner.web_save",
+              "ms": 2806
+            },
+            {
+              "call": "res.partner.web_save",
+              "ms": 642
+            },
+            {
+              "call": "res.partner.add_product",
+              "ms": 446
+            },
+            {
+              "call": "res.partner.web_save",
+              "ms": 510
+            },
+            {
+              "call": "res.partner.add_product_catalog",
+              "ms": 395
+            },
+            {
+              "call": "res.partner.web_save",
+              "ms": 844
+            }
+          ]
+        },
+        {
+          "name": "Reopen saved customer (form load)",
+          "kind": "app",
+          "ms": 11642,
+          "ok": true,
+          "serverMs": 0,
+          "calls": []
+        }
+      ],
+      "notes": [
+        "PERF-CUST-52632 -> https://martiserv.averigoqa.com/odoo/customer/30550"
+      ],
+      "at": "2026-10-20T08:33:27.810Z"
+    },
+    "2": {
+      "no": 2,
+      "title": "Creation of vendor (all fields)",
+      "status": "passed",
+      "totalMs": 209558,
+      "steps": [
+        {
+          "name": "Create vendor: every field, contact + remit-to address, account setup, Products line",
+          "kind": "flow",
+          "ms": 203554,
+          "ok": true,
+          "serverMs": 4063,
+          "calls": [
+            {
+              "call": "res.partner.web_save",
+              "ms": 455
+            },
+            {
+              "call": "res.partner.web_save",
+              "ms": 1213
+            },
+            {
+              "call": "res.partner.web_save",
+              "ms": 1235
+            },
+            {
+              "call": "res.partner.web_save",
+              "ms": 387
+            },
+            {
+              "call": "res.partner.add_vendor_products",
+              "ms": 418
+            },
+            {
+              "call": "res.partner.web_save",
+              "ms": 355
+            }
+          ]
+        },
+        {
+          "name": "Reopen saved vendor (form load)",
+          "kind": "app",
+          "ms": 5997,
+          "ok": true,
+          "serverMs": 0,
+          "calls": []
+        }
+      ],
+      "notes": [
+        "PERF-VEND-52632 -> https://martiserv.averigoqa.com/odoo/action-1782/30558"
+      ],
+      "at": "2026-10-20T08:37:05.020Z"
+    },
+    "3": {
+      "no": 3,
+      "title": "Creation of micromarket in location screen (all fields)",
+      "status": "passed",
+      "totalMs": 221804,
+      "steps": [
+        {
+          "name": "Open Locations list",
+          "kind": "app",
+          "ms": 12934,
+          "ok": true,
+          "serverMs": 0,
+          "calls": []
+        },
+        {
+          "name": "Open new location form",
+          "kind": "app",
+          "ms": 1014,
+          "ok": true,
+          "serverMs": 0,
+          "calls": []
+        },
+        {
+          "name": "Fill type Micromarket, name, customer, address",
+          "kind": "ui",
+          "ms": 2581,
+          "ok": true,
+          "serverMs": 0,
+          "calls": []
+        },
+        {
+          "name": "Save micromarket (builds its warehouse)",
+          "kind": "app",
+          "ms": 80101,
+          "ok": true,
+          "serverMs": 76163,
+          "calls": [
+            {
+              "call": "stock.warehouse.web_save",
+              "ms": 76163
+            }
+          ]
+        },
+        {
+          "name": "Fill every other field (store #, image, division, route, frequency, flags, contact, notes, price list) + save",
+          "kind": "flow",
+          "ms": 43182,
+          "ok": true,
+          "serverMs": 857,
+          "calls": [
+            {
+              "call": "stock.warehouse.web_save",
+              "ms": 857
+            }
+          ]
+        },
+        {
+          "name": "Micromarket fees (Setup > Micromarket Fees) + save",
+          "kind": "flow",
+          "ms": 75963,
+          "ok": true,
+          "serverMs": 344,
+          "calls": [
+            {
+              "call": "stock.warehouse.web_save",
+              "ms": 344
+            }
+          ]
+        },
+        {
+          "name": "Reopen saved micromarket (form load)",
+          "kind": "app",
+          "ms": 6022,
+          "ok": true,
+          "serverMs": 0,
+          "calls": []
+        }
+      ],
+      "notes": [
+        "PERF-MM-52632 -> https://martiserv.averigoqa.com/odoo/location/4743"
+      ],
+      "at": "2026-10-20T08:40:53.522Z"
+    },
+    "4": {
+      "no": 4,
+      "title": "Creation of product from product master (all fields)",
+      "status": "passed",
+      "totalMs": 70419,
+      "steps": [
+        {
+          "name": "Create product: every field, accounts, tax/deposit, UPC, UoM specification, images",
+          "kind": "flow",
+          "ms": 66958,
+          "ok": true,
+          "serverMs": 1108,
+          "calls": [
+            {
+              "call": "product.template.web_save",
+              "ms": 1108
+            }
+          ]
+        },
+        {
+          "name": "Reopen saved product (form load)",
+          "kind": "app",
+          "ms": 3456,
+          "ok": true,
+          "serverMs": 0,
+          "calls": []
+        }
+      ],
+      "notes": [
+        "PERF-PROD-52632 -> https://martiserv.averigoqa.com/odoo/product-master/128178"
+      ],
+      "at": "2026-10-20T08:42:37.998Z"
+    },
+    "5": {
+      "no": 5,
+      "title": "Creation of Sale order for 150 products (all fields)",
+      "status": "passed",
+      "totalMs": 752016,
+      "steps": [
+        {
+          "name": "Open Orders list",
+          "kind": "app",
+          "ms": 13076,
+          "ok": true,
+          "serverMs": 0,
+          "calls": []
+        },
+        {
+          "name": "Open new order form",
+          "kind": "app",
+          "ms": 2661,
+          "ok": true,
+          "serverMs": 0,
+          "calls": []
+        },
+        {
+          "name": "Customer + Show All Products",
+          "kind": "ui",
+          "ms": 6285,
+          "ok": true,
+          "serverMs": 0,
+          "calls": []
+        },
+        {
+          "name": "Pick 150 products (Search More)",
+          "kind": "ui",
+          "ms": 30403,
+          "ok": true,
+          "serverMs": 0,
+          "calls": []
+        },
+        {
+          "name": "Add 150 products to the order",
+          "kind": "app",
+          "ms": 3551,
+          "ok": true,
+          "serverMs": 0,
+          "calls": []
+        },
+        {
+          "name": "Set quantity 1 on every line",
+          "kind": "ui",
+          "ms": 619296,
+          "ok": true,
+          "serverMs": 0,
+          "calls": []
+        },
+        {
+          "name": "Every header field: contact, promise date, FOB, ship via, notes, S&H, insurance, discount, addresses, route, drop location",
+          "kind": "ui",
+          "ms": 31425,
+          "ok": true,
+          "serverMs": 0,
+          "calls": []
+        },
+        {
+          "name": "Save order (150 lines)",
+          "kind": "app",
+          "ms": 31728,
+          "ok": true,
+          "serverMs": 28589,
+          "calls": [
+            {
+              "call": "sale.order.web_save",
+              "ms": 28589
+            }
+          ]
+        },
+        {
+          "name": "Confirm order (150 lines)",
+          "kind": "app",
+          "ms": 4821,
+          "ok": true,
+          "serverMs": 1500,
+          "calls": [
+            {
+              "call": "sale.order.action_confirm",
+              "ms": 1500
+            }
+          ]
+        },
+        {
+          "name": "Reopen confirmed order (form load)",
+          "kind": "app",
+          "ms": 7851,
+          "ok": true,
+          "serverMs": 0,
+          "calls": []
+        }
+      ],
+      "notes": [
+        "150 products picked",
+        "150 order lines",
+        "Q01690 -> https://martiserv.averigoqa.com/odoo/sales-order/17322"
+      ],
+      "at": "2026-10-20T09:15:15.551Z"
+    },
+    "6": {
+      "no": 6,
+      "title": "Creation of purchase order for 150 products (all fields)",
+      "status": "running",
+      "totalMs": 61199,
+      "steps": [
+        {
+          "name": "Open Purchase Order list",
+          "kind": "app",
+          "ms": 11296,
+          "ok": true,
+          "serverMs": 0,
+          "calls": []
+        },
+        {
+          "name": "Open new purchase order form",
+          "kind": "app",
+          "ms": 1063,
+          "ok": true,
+          "serverMs": 0,
+          "calls": []
+        },
+        {
+          "name": "Every header field: vendor, warehouse, to be printed, purchase manager, contact, terms, dates, ship via",
+          "kind": "ui",
+          "ms": 22132,
+          "ok": true,
+          "serverMs": 0,
+          "calls": []
+        },
+        {
+          "name": "Pick 150 products (Search More)",
+          "kind": "ui",
+          "ms": 19126,
+          "ok": true,
+          "serverMs": 0,
+          "calls": []
+        },
+        {
+          "name": "Add 150 products to the PO",
+          "kind": "app",
+          "ms": 6933,
+          "ok": true,
+          "serverMs": 0,
+          "calls": []
+        }
+      ],
+      "notes": [
+        "150 products picked"
+      ],
+      "at": "2026-10-20T09:29:23.249Z"
+    },
+    "7": {
+      "no": 7,
+      "title": "Creation of store order for 150 products",
+      "status": "failed",
+      "totalMs": 67331,
+      "steps": [
+        {
+          "name": "Open the micromarket (scenario 3)",
+          "kind": "setup",
+          "ms": 6065,
+          "ok": true,
+          "serverMs": 0,
+          "calls": []
+        },
+        {
+          "name": "Pick 150 products for the market",
+          "kind": "setup",
+          "ms": 60020,
+          "ok": false,
+          "serverMs": 0,
+          "calls": []
+        }
+      ],
+      "notes": [],
+      "error": "locator.click: Timeout 60000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.modal:visible').filter({ hasNotText: 'Open Customer Activities' }).locator('.o_form_view').or(locator('.o_action_manager .o_form_view, .o_action_manager .o_view_controller.o_list_view .o_selected_row')).last().locator('.o_field_widget[name=\"single_product_ids\"]').visible().first().locator('input').first()\u001b[22m\n",
+      "at": "2026-10-20T09:23:31.454Z"
+    },
+    "8": {
+      "no": 8,
+      "title": "Creation of Equipment (all fields)",
+      "status": "passed",
+      "totalMs": 70443,
+      "steps": [
+        {
+          "name": "Create equipment: every field, warehouse, image, flags, warranty, parts, note",
+          "kind": "flow",
+          "ms": 66865,
+          "ok": true,
+          "serverMs": 886,
+          "calls": [
+            {
+              "call": "account.asset.web_save",
+              "ms": 518
+            },
+            {
+              "call": "account.asset.web_save",
+              "ms": 368
+            }
+          ]
+        },
+        {
+          "name": "Reopen saved equipment (form load)",
+          "kind": "app",
+          "ms": 3571,
+          "ok": true,
+          "serverMs": 0,
+          "calls": []
+        }
+      ],
+      "notes": [
+        "PERF-EQ-52632 -> https://martiserv.averigoqa.com/odoo/equipment/12179"
+      ],
+      "at": "2026-10-20T09:24:54.239Z"
+    },
+    "9": {
+      "no": 9,
+      "title": "Creation of opportunity (all fields)",
+      "status": "passed",
+      "totalMs": 114360,
+      "steps": [
+        {
+          "name": "Create opportunity: every field (contact, address, team, tags, priority, properties, campaign, notes ...)",
+          "kind": "flow",
+          "ms": 111066,
+          "ok": true,
+          "serverMs": 1076,
+          "calls": [
+            {
+              "call": "crm.lead.web_save",
+              "ms": 684
+            },
+            {
+              "call": "crm.lead.web_save",
+              "ms": 392
+            }
+          ]
+        },
+        {
+          "name": "Reopen saved opportunity (form load)",
+          "kind": "app",
+          "ms": 3289,
+          "ok": true,
+          "serverMs": 0,
+          "calls": []
+        }
+      ],
+      "notes": [
+        "PERF-OPP-52632 -> https://martiserv.averigoqa.com/odoo/action-1796/5631"
+      ],
+      "at": "2026-10-20T09:26:53.854Z"
+    }
+  },
+  "finishedAt": "2026-10-20T09:29:23.249Z"
+}

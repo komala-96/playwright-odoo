@@ -1,0 +1,18 @@
+## Vendor Invoice Report
+  filters: Vendors=chips | Bill Status=select[Open/Closed] | Start Date*=date | End Date=date | Report Type=select[Summary/Detail]
+  columns: SAP Vendor # | Vendor | Invoice Date | Vendor Invoice # | Status | Invoice Total | Amount Paid | Balance
+## Purchase Order Report
+  filters: Vendors=chips | Start Date*=date | End Date=date | Status=select[All/Open/Closed] | Type=select[Summary/Detail]
+  columns: Vendor | PO No | Order Date | Ordered Qty | Received Qty | Amount | # of SKUs
+## Vendor List Report
+  filters: City=chips | State=chips | Activity Status=select[Active/Archived] | 1099 Vendor=input
+  columns: Vendor # | SAP # | Vendor Name | Address | Contact Name | Contact Phone # | Credit Limit | Terms
+## Inventory Receipt Report
+  filters: Type=select[Transaction/Vendor/Category] | Vendor=chips | Product Categories=chips | Start Date*=date | End Date=date
+  columns: Vendor # | Vendor | Trans # | Date | Category | Product | Quantity | Cost | Total Amount
+## Product Order Report
+  filters: Category=chips | Product=chips | As of Date*=date
+  columns: Product Code | Product Description | Product Category | Last Purchase Date | Average Weekly Moves | Current Stock | Truck Stock
+## Product Transaction Report (Inventory)
+  filters: Customers=chips | Products=chips | From Date*=date | To Date*=date | Transaction Type=select[All Types/Bill/Credit Memo/Debit Memo/Direct Invoice/Pack Slip/Purchase/Purchase Return/Quantity Adjustment/Sales Return/Material - Issue/Material - Receipt/Purchase Receipt/Value Adjustment/Store Order]
+  columns: Name | Product Code | Product Description | Location | Trans.# | Trans.Date | Transfer Type | Qty | Price | Cost | Amount

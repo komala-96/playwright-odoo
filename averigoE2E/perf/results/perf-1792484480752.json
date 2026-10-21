@@ -1,0 +1,27 @@
+{
+  "runId": "1792484480752",
+  "baseUrl": "https://martiserv.averigoqa.com",
+  "startedAt": "2026-10-20T08:21:36.341Z",
+  "scenarios": {
+    "1": {
+      "no": 1,
+      "title": "Creation of customer (all fields)",
+      "status": "failed",
+      "totalMs": 152871,
+      "steps": [
+        {
+          "name": "Create customer: every field, 7 contacts/addresses, Order Products, catalogue, account setup, preventive case",
+          "kind": "flow",
+          "ms": 152870,
+          "ok": false,
+          "serverMs": 0,
+          "calls": []
+        }
+      ],
+      "notes": [],
+      "error": "locator.waitFor: Timeout 60000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.modal:visible').filter({ hasNotText: 'Open Customer Activities' }).locator('.o_form_view').or(locator('.o_action_manager .o_form_view, .o_action_manager .o_view_controller.o_list_view .o_selected_row')).last().locator('.o_field_widget[name=\"parent_partner_id\"]').visible().first().locator('.o_av_cdd_panel').locator('.o_av_cdd_list li').filter({ hasText: 'PCUST-QA-001-09600' }).first() to be visible\u001b[22m\n",
+      "at": "2026-10-20T08:24:09.212Z"
+    }
+  },
+  "finishedAt": "2026-10-20T08:24:09.212Z"
+}

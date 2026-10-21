@@ -1,0 +1,25 @@
+const { chromium } = require('@playwright/test');
+const env = require('../config/env');
+const { OdooPage } = require('../pages/OdooPage');
+(async () => {
+  const tile = process.argv[2] || 'Product Addition/Deletion Report';
+  const b = await chromium.launch();
+  const c = await b.newContext({ storageState: env.AUTH_FILE, baseURL: env.BASE_URL, viewport: { width: 1600, height: 900 } });
+  const p = await c.newPage();
+  await p.addLocatorHandler(p.locator('.modal.o_technical_modal').filter({ hasText: 'Open Customer Activities' }), (m) => m.locator('.btn-close').first().click({ timeout: 5000 }).catch(() => m.page().keyboard.press('Escape')));
+  const o = new OdooPage(p);
+  await o.openApp('Averigo Reports'); await p.waitForTimeout(2000);
+  const outer = (sel) => p.locator(sel).first().evaluate((e) => e.outerHTML.replace(/\s+/g, ' ').slice(0, 500)).catch(() => 'n/a');
+  console.log('CATEGORY:', await outer(':text("Inventory") >> xpath=ancestor-or-self::*[self::li or self::a or self::div][1]'));
+  console.log('SEARCH:', await outer('input[placeholder*="Search reports"]'));
+  console.log('TILE:', await outer(':text("Terminal Report") >> xpath=ancestor::*[contains(@class,"card") or self::a or contains(@class,"tile")][1]'));
+  await p.locator('.category-btn').filter({ hasText: process.argv[3] || 'Inventory' }).first().click(); await p.waitForTimeout(1200);
+  await p.locator('.report-card').filter({ has: p.locator('.report-name', { hasText: tile }) }).first().click(); await p.waitForTimeout(4000);
+  console.log('URL', p.url());
+  console.log('FIELDS', await p.evaluate(() => [...document.querySelectorAll('.o_field_widget[name]')].filter((e) => e.offsetParent).map((e) => `${e.getAttribute('name')}[${(e.className.match(/o_field_(?!widget)\w+/g) || []).join(',')}]`).join(' ')));
+  console.log('BUTTONS', await p.evaluate(() => [...document.querySelectorAll('button')].filter((b) => b.offsetParent && b.innerText.trim()).map((b) => b.innerText.trim() + (b.name ? `{${b.name}}` : '')).join(' | ')));
+    console.log('FILTER HTML', await p.evaluate(() => { const g = [...document.querySelectorAll('button')].find((b) => b.innerText.trim() === 'Generate'); let n = g; for (let i = 0; i < 4 && n; i++) n = n.parentElement; return n ? n.outerHTML.replace(/\s+/g, ' ').replace(/<svg.*?<\/svg>/g, '').slice(0, 2500) : 'none'; }));
+  console.log('TABLE', await p.evaluate(() => (document.querySelector('table')?.outerHTML || 'none').replace(/\s+/g, ' ').slice(0, 800)));
+  await p.screenshot({ path: 'tools/last.png' });
+  await b.close();
+})();

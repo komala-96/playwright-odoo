@@ -1,0 +1,30 @@
+const { chromium } = require('@playwright/test');
+const env = require('../config/env');
+const d = require('../data/testData');
+const { SalesPage } = require('../pages/SalesPage');
+(async () => {
+  const b = await chromium.launch();
+  const c = await b.newContext({ storageState: env.AUTH_FILE, baseURL: env.BASE_URL, viewport: { width: 1600, height: 1000 } });
+  const p = await c.newPage();
+  await p.addLocatorHandler(p.locator('.modal.o_technical_modal').filter({ hasText: 'Open Customer Activities' }), (m) => m.locator('.btn-close').first().click({ timeout: 5000 }).catch(() => m.page().keyboard.press('Escape')));
+  const s = new SalesPage(p);
+  await s.openOrders(); await s.clickNew();
+  await s.fill({ partner_id: d.customer1.name });
+  await s.fill({ sell_all_item: true });
+  await s.fill({ cus_product_assoc_ids: [d.products.p1.name] });
+  await s.field('add_button').locator('button').click(); await s.waitReady();
+  const row = s.orderLine(d.products.p1.code);
+  console.log('BIN CELL (not editing):', await row.locator('td[name="bin_location_id"]').evaluate((e) => e.className + ' :: ' + e.innerText));
+  await row.locator('td[name="bin_location_id"]').click(); await p.waitForTimeout(1000);
+  const sel = s.field('order_line').locator('.o_data_row.o_selected_row');
+  console.log('BIN CELL (editing):', await sel.locator('td[name="bin_location_id"]').evaluate((e) => e.className + ' :: ' + e.innerHTML.slice(0, 400)));
+  const inp = sel.locator('td[name="bin_location_id"] input');
+  if (await inp.count()) { await inp.click(); await p.waitForTimeout(1500); console.log('BIN OPTIONS:', (await p.locator('.o-autocomplete--dropdown-item').allInnerTexts()).join(' | ')); }
+  await p.keyboard.press('Escape');
+  await s.openTab('Other Info');
+  const dl = s.field('drop_location_id').locator('input').first();
+  await dl.click(); await p.waitForTimeout(1500);
+  console.log('DROP OPTIONS:', (await p.locator('.o-autocomplete--dropdown-item').allInnerTexts()).join(' | '));
+  await s.discard().catch(() => {});
+  await b.close();
+})();

@@ -1,0 +1,11 @@
+node_modules/
+.env
+.auth/
+.runtime/
+test-results/
+reports/
+tools/last.png
+
+# Local run state (per machine)
+.runid*
+*.pid

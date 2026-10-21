@@ -1,0 +1,35 @@
+const { chromium } = require('@playwright/test');
+const env = require('../config/env');
+const { SalesPage } = require('../pages/SalesPage');
+(async () => {
+  const orderUrl = require('fs').readFileSync('tools/last-order-url.txt', 'utf8').trim();
+  const b = await chromium.launch();
+  const c = await b.newContext({ storageState: env.AUTH_FILE, baseURL: env.BASE_URL, viewport: { width: 1600, height: 1000 } });
+  const p = await c.newPage();
+  await p.addLocatorHandler(p.locator('.modal.o_technical_modal').filter({ hasText: 'Open Customer Activities' }), (m) => m.locator('.btn-close').first().click({ timeout: 5000 }).catch(() => m.page().keyboard.press('Escape')));
+  const o = new SalesPage(p);
+  await o.goto(orderUrl);
+  const so = await o.recordTitle(); console.log('ORDER', so);
+  await o.openApp('Customer Care'); await o.openMenu('Delivery', 'Pick List');
+  console.log('LIST COLS', await p.locator('.o_list_view th[data-name]').evaluateAll((t) => t.map((x) => x.dataset.name + ':' + x.innerText.trim()).join(' | ')));
+  await o.search(so);
+  const row = o.rows(so).first();
+  await row.locator('td.o_list_record_selector').click();
+  await p.locator('.o_control_panel button').filter({ hasText: 'Packing Slip' }).click(); await o.waitReady(); await p.waitForTimeout(2000);
+  console.log('URL', p.url());
+  console.log('FIELDS', await p.evaluate(() => [...document.querySelectorAll('.o_form_view .o_field_widget[name]')].filter((e) => e.offsetParent && !e.closest('.o_data_row')).map((e) => e.getAttribute('name') + '[' + (e.className.match(/o_field_(?!widget)\w+/g) || []).join(',') + ']').join(' ')));
+  console.log('LINE COLS', await p.locator('.o_form_view th[data-name]').evaluateAll((t) => t.map((x) => x.dataset.name + ':' + x.innerText.trim()).join(' | ')));
+  console.log('LINES', await p.locator('.o_form_view .o_data_row').allInnerTexts());
+  console.log('BUTTONS', await p.evaluate(() => [...document.querySelectorAll('.o_form_view button')].filter((b) => b.offsetParent && b.innerText.trim()).map((b) => b.innerText.trim().replace(/\s+/g, ' ') + (b.name ? `{${b.name}}` : '')).join(' | ')));
+  await o.fill({ select_all_pick: true }); await p.waitForTimeout(800);
+  console.log('CHECKS', await p.locator('.o_form_view .o_data_row td[name=pack_slip_check] input, .o_form_view .o_data_row td[name=pack_invoice_check] input').evaluateAll((e) => e.map((x) => x.checked)));
+  await p.screenshot({ path: 'tools/last.png' }); console.log('MODAL BEFORE', await p.locator('.modal:visible').allInnerTexts());
+  await o.click('confirm_pack_slip'); await p.waitForTimeout(3000);
+  console.log('AFTER URL', p.url());
+  console.log('MODAL', (await p.locator('.modal:visible').last().innerText()).slice(0, 300)); const ok = p.locator('.modal:visible').last().locator('button').filter({ hasText: /^\s*Ok\s*$/ }); if (await ok.isVisible().catch(() => false)) { await ok.click(); await o.waitReady(); await p.waitForTimeout(2500); console.log('AFTER OK URL', p.url(), 'MODALS', (await p.locator('.modal:visible').allInnerTexts()).map((t) => t.slice(0, 200))); }
+  console.log('STATUS', (await p.locator('.o_statusbar_status').innerText().catch(() => '')).replace(/\s+/g, ' '));
+  console.log('BUTTONS2', await p.evaluate(() => [...document.querySelectorAll('.o_form_view button, .modal button')].filter((b) => b.offsetParent && b.innerText.trim()).map((b) => b.innerText.trim().replace(/\s+/g, ' ') + (b.name ? `{${b.name}}` : '')).join(' | ')));
+  console.log('FIELDS2', await p.evaluate(() => [...document.querySelectorAll('.o_form_view .o_field_widget[name]')].filter((e) => e.offsetParent && !e.closest('.o_data_row')).map((e) => e.getAttribute('name')).join(' ')));
+  console.log('CP BUTTONS', await p.evaluate(() => [...document.querySelectorAll('.o_control_panel button, .o_list_buttons button')].filter((b) => b.offsetParent && b.innerText.trim()).map((b) => b.innerText.trim()).join(' | ')));
+  await b.close();
+})();

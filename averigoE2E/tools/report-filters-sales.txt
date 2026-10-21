@@ -1,0 +1,39 @@
+## Aging By Customer Report
+  filters: Customers=chips | As On Date*=date | Aged By=select[Due Date/Invoice date] | Report Type=select[Summary/Detail/Transaction] | Accounts Manager=chips
+  columns: Accounts Manager | Customer No | Customer | Customer Address | Current | 1-30 | 31-60 | 61-90 | Above 90 | Total
+## Open Invoice Customer Statement
+  filters: Customers=chips | As of Date=date
+  columns: Customer | Invoice Date | Invoice | PO # | Total Amount | Due Amount
+## Invoice List Report
+  filters: Customers=chips | Route=chips | Start Date*=date | End Date=date | Invoice Type=select[Direct Invoice/Pantry Invoice/Sale Order Invoice] | Status*=select[All/Open/Closed]
+  columns: Customer # | Customer | SAP Customer # | Route | Invoice No | Invoice Date | Invoice Type | Status | Amount | Amount Paid | Balance | Preview
+## Invoice Export Report
+  filters: Customers=chips | Start Date*=date | End Date*=date
+  columns: Invoice Date | Invoice No | Generation Date | Document Type | Amount
+## Receipt List Report
+  filters: Customers=chips | Start Date=date | End Date=date | Account=select[Account/101401 - Bank/101402 - Check/101403 - Credit Card/101404 - Wire Transfer/101405 - Write Off/101406 - Advance/101501 - Cash] | Mode of Payment=select[Mode of Payment/Advance/Cash/Check/Credit Card/Wire Transfer/Write Off]
+  columns: SAP Customer # | Customer # | Customer | Invoice # | Invoice Date | Account | Receipt | Paid Date | Mode of Payment | Check / Reference No | Amount
+## Revenue By Customer Report
+  filters: Customers=chips | Micromarkets=chips | Market Type=chips | Start Date*=date | End Date*=date | Include Closed Markets=input | Show By Month=input | Previous Year Comparison=input
+  columns: Customer ⇅ | Nick Name ⇅ | Micromarket ⇅ | Previous Year Quantity ⇅ | Current Year Quantity ⇅ | Previous Year ⇅ | Current Year ⇅
+## Revenue By Customer - Delivery
+  filters: Customers=chips | Start Date*=date | End Date=date | Show By Month=input | Previous Year Comparison=input
+  columns: S.No | Customer ⇅ | Nick Name ⇅ | Current Year Quantity ⇅ | Current Year Revenue ⇅
+## Where Sold Report (Warehouse)
+  filters: Customers=chips | Categories=chips | Products=chips | Start Date=date | End Date=date | Type=select[Sales Order/Sales Return/Store Order]
+  columns: Product Code | Product Description | Category | UOM | Customer Name | Quantity Sold | Sold Price | Sales Amount
+## Customer Order Activity Report
+  filters: Accounts Manager=chips | Customers=chips | Inactive Days=input
+  columns: Accounts Manager | Customer No | Customer | Bill City | Bill To State | Bill To Zip | Last Sale Order Date | Inactive Days
+## Order List Report
+  filters: Customers=chips | Order Type*=select[Sales Order/Store Order] | Start Date*=date | End Date*=date | Route=chips | Status=select[All/Open/Confirmed/Cancelled]
+  columns: Customer # | Customer | Route Name | Order TRN # | PO # | Order Date | Order Type | Status | Amount | Preview
+## Order Margin Report
+  filters: Customers=chips | Accounts Manager=chips | Start Date*=date | End Date=date | Report Type=select[Summary/Detail] | Show Below Margin %=input
+  columns: Accounts Manager | Customer | Order No | Order Date | Order Day | Total Qty | Order Amount | Subtotal | Total Cost | Margin | Margin %
+## Sales Tax Report
+  filters: State*=select[55044 - MN/AA - Armed Forces Americas/AE - Armed Forces Europe/AK - Alaska/AL - Alabama/AP - Armed Forces Pacific/AR - Arkansas/AS - American Samoa/AZ - Arizona/CA - California/CO - Colorado/CT - Connecticut/DC - District of Columbia/DE - Delaware/FL - Florida/FM - Federated States of Micronesia/GA - Georgia/GU - Guam/HI - Hawaii/IA - Iowa/ID - Idaho/IL - Illinois/IN - Indiana/KS - Kansas/KY - Kentucky/LA - Louisiana/MA - Massachusetts/MD - Maryland/ME - Maine/MH - Marshall Islands/MI - Michigan/MN - Minnesota/MO - Missouri/MP - Northern Mariana Islands/MS - Mississippi/MT - Montana/NC - North Carolina/ND - North Dakota/NE - Nebraska/NH - New Hampshire/NJ - New Jersey/NM - New Mexico/NV - Nevada/NY - New York/OH - Ohio/OK - Oklahoma/OR - Oregon/PA - Pennsylvania/PR - Puerto Rico/PW - Palau/RI - Rhode Island/SC - South Carolina/SD - South Dakota/TN - Tennessee/TX - Texas/UT - Utah/VA - Virginia/VI - Virgin Islands/VT - Vermont/WA - Washington/WI - Wisconsin/WV - West Virginia/WY - Wyoming] | Customers=chips | Start Date*=date | End Date=date | Report Type=select[Summary/Detail]
+  columns: State | County | Gross Sales | Total Sales | Non-Taxable Sales | Taxable Sales | Tax Rate (%) | Tax Amount
+## Customer Retention Report
+  filters: Type=select[Open Activity/Closed Activity/Notes/Events] | Activity Type=chips | Start Date*=date | End Date*=date | Status=select[All/Overdue/Today/Planned] | Created By=chips | Assigned To=chips
+  columns: Name | Source | Assigned To | Subject | Created User | Created Date | Activity Type | Due Date | Status

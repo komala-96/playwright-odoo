@@ -1,0 +1,30 @@
+const { chromium } = require('@playwright/test');
+const env = require('../config/env');
+const d = require('../data/testData');
+const { CustomerCarePage } = require('../pages/CustomerCarePage');
+(async () => {
+  const b = await chromium.launch();
+  const c = await b.newContext({ storageState: env.AUTH_FILE, baseURL: env.BASE_URL, viewport: { width: 1600, height: 1000 } });
+  const p = await c.newPage();
+  await p.addLocatorHandler(p.locator('.modal.o_technical_modal').filter({ hasText: 'Open Customer Activities' }), (m) => m.locator('.btn-close').first().click({ timeout: 5000 }).catch(() => m.page().keyboard.press('Escape')));
+  const o = new CustomerCarePage(p);
+  await o.openNewCustomer();
+  console.log('TAX FIELDS', await p.evaluate(() => ['fuel_charge', 'hazard_fee', 'subsidy', 'parent_partner_id'].map((n) => { const e = [...document.querySelectorAll(`.o_field_widget[name=${n}]`)].find((x) => x.offsetParent); const lab = e && (e.closest('.o_wrap_field, .o_cell, div')?.innerText || '').trim().slice(0, 40); return `${n}: ${e ? 'visible' : 'hidden'} ${lab || ''}`; }).join(' | ')));
+  await o.addProducts([d.products.p1.code]);
+  await p.waitForTimeout(2000); await p.screenshot({ path: 'tools/last.png' }); console.log('LISTS', await p.evaluate(() => [...document.querySelectorAll('.o_form_view .o_field_widget.o_field_one2many, .o_form_view .o_field_x2many')].map((e) => e.getAttribute('name') + ':' + e.className + ':rows=' + e.querySelectorAll('.o_data_row').length).join(' | ')));
+  const row = o.productLine(d.products.p1.code);
+  console.log('ROW', await row.innerText());
+  const cells = await row.locator('td').evaluateAll((tds) => tds.map((t) => `${t.getAttribute('name')}:${t.className.includes('o_readonly_modifier') ? 'ro' : 'rw'}`));
+  console.log('CELLS', cells.join(' '));
+  await row.locator('td[name=uom_id]').click(); await p.waitForTimeout(800);
+  console.log('UOM CELL', (await row.locator('td[name=uom_id]').evaluate((e) => e.innerHTML)).replace(/\s+/g, ' ').slice(0, 400));
+  const inp = row.locator('td[name=uom_id] input');
+  if (await inp.count()) { await inp.fill(''); await inp.click(); await p.waitForTimeout(1000); console.log('UOM OPTIONS', await p.locator('.o-autocomplete--dropdown-item:visible').allInnerTexts()); await p.keyboard.press('Escape'); }
+  await row.locator('td[name=order_type]').click(); await p.waitForTimeout(800);
+  console.log('ORDER TYPE CELL', (await row.locator('td[name=order_type]').evaluate((e) => e.innerHTML)).replace(/\s+/g, ' ').slice(0, 300));
+  await o.field('product_ids').locator('button').click(); await p.waitForTimeout(1000);
+  const modal = p.locator('.modal:visible').last();
+  await modal.locator('.o_searchview_input').fill(d.products.p1.code); await modal.locator('.o_searchview_input').press('Enter'); await p.waitForTimeout(1500);
+  console.log('P1 AGAIN IN DIALOG?', await modal.locator('.o_data_row').count());
+  await b.close();
+})();

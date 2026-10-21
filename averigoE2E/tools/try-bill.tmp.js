@@ -1,0 +1,23 @@
+const { chromium } = require('@playwright/test');
+const env = require('../config/env');
+const { PurchasePage } = require('../pages/PurchasePage');
+(async () => {
+  const url = require('fs').readFileSync('tools/last-po-url.txt', 'utf8').trim();
+  const b = await chromium.launch();
+  const c = await b.newContext({ storageState: env.AUTH_FILE, baseURL: env.BASE_URL, viewport: { width: 1600, height: 1000 } });
+  const p = await c.newPage();
+  await p.addLocatorHandler(p.locator('.modal.o_technical_modal').filter({ hasText: 'Open Customer Activities' }), (m) => m.locator('.btn-close').first().click({ timeout: 5000 }).catch(() => m.page().keyboard.press('Escape')));
+  const o = new PurchasePage(p);
+  await o.goto(url);
+  console.log('PO BUTTONS', await p.evaluate(() => [...document.querySelectorAll('.o_form_view button')].filter((b) => b.offsetParent && b.innerText.trim()).map((b) => b.innerText.trim().replace(/\s+/g, ' ') + (b.name ? `{${b.name}}` : '')).join(' | ')));
+  await o.dismissPopups();
+  await p.locator('.o_form_view button[name=action_view_invoice]').first().click(); await o.waitReady(); await p.waitForTimeout(2500);
+  console.log('URL', p.url(), 'TITLE', await o.recordTitle().catch(() => '?'));
+  console.log('MODALS', (await p.locator('.modal:visible').allInnerTexts()).map((t) => t.replace(/\s+/g, ' ').slice(0, 300)));
+  console.log('FIELDS', await p.evaluate(() => [...document.querySelectorAll('.o_form_view .o_field_widget[name]')].filter((e) => e.offsetParent && !e.closest('.o_data_row')).map((e) => e.getAttribute('name') + (e.classList.contains('o_required_modifier') ? '*' : '')).join(' ')));
+  console.log('STATUS', (await p.locator('.o_statusbar_status').innerText().catch(() => '')).replace(/\s+/g, ' '));
+  console.log('BUTTONS', await p.evaluate(() => [...document.querySelectorAll('.o_form_view button')].filter((b) => b.offsetParent && b.innerText.trim()).map((b) => b.innerText.trim().replace(/\s+/g, ' ') + (b.name ? `{${b.name}}` : '')).join(' | ')));
+  console.log('TOTALS', await o.readAmounts({ subtotal: 'amount_untaxed', total: 'amount_total_view', total2: 'amount_total', residual: 'amount_residual', balance: 'bill_balance' }));
+  require('fs').writeFileSync('tools/last-bill-url.txt', p.url());
+  await b.close();
+})();

@@ -1,0 +1,21 @@
+const { chromium } = require('@playwright/test');
+const env = require('../config/env');
+const { InventoryPage } = require('../pages/InventoryPage');
+(async () => {
+  const b = await chromium.launch();
+  const c = await b.newContext({ storageState: env.AUTH_FILE, baseURL: env.BASE_URL, viewport: { width: 1600, height: 1000 } });
+  const p = await c.newPage();
+  await p.addLocatorHandler(p.locator('.modal.o_technical_modal').filter({ hasText: 'Open Customer Activities' }), (m) => m.locator('.btn-close').first().click({ timeout: 5000 }).catch(() => m.page().keyboard.press('Escape')));
+  const i = new InventoryPage(p);
+  await i.open(); await i.openMenu('Configuration', 'Product Categories'); await i.clickNew();
+  await i.fill({ route_ids: 'Buy' });
+  await p.waitForTimeout(1000);
+  console.log('after route:', JSON.stringify(await i.field('route_ids').innerText()));
+  await i.fill({ removal_strategy_id: 'First In First Out (FIFO)' });
+  await p.waitForTimeout(1000);
+  console.log('after removal:', JSON.stringify(await i.field('route_ids').innerText()));
+  await i.fill({ property_stock_journal: 'Inventory Valuation' });
+  console.log('after journal:', JSON.stringify(await i.field('route_ids').innerText()));
+  await p.screenshot({ path: 'tools/last.png' });
+  await b.close();
+})();

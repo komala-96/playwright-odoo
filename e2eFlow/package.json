@@ -1,0 +1,16 @@
+{
+  "name": "e2eFlow-playwright",
+  "version": "1.0.0",
+  "description": "E2E flow scaffolded from e2eRegression, starting with the login step",
+  "scripts": {
+    "test": "playwright test",
+    "test:positive": "playwright test tests/positive",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.48.0"
+  },
+  "dependencies": {
+    "xlsx": "^0.18.5"
+  }
+}

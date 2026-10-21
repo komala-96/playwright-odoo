@@ -1,0 +1,23 @@
+{
+  "name": "averigo-e2e-playwright",
+  "version": "1.0.0",
+  "description": "Martiserv (AveriGo) end-to-end suite generated from End_to_End_QA_Test_Cases.xlsx (TC-001..TC-109)",
+  "private": true,
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:critical": "playwright test --grep @critical",
+    "test:reports": "playwright test --grep @report",
+    "test:negative": "playwright test --grep @negative",
+    "login": "playwright test tests/00-auth.spec.js --headed",
+    "report": "playwright show-report reports/html",
+    "new-data": "node -e \"require('fs').writeFileSync('.runid', 'export RUN_ID=' + Date.now() + '\\n'); console.log(require('fs').readFileSync('.runid', 'utf8'))\""
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "xlsx": "^0.18.5"
+  }
+}
